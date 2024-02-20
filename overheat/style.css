@@ -1,0 +1,26 @@
+.formulario{
+    display: flex;
+    padding: 10px;
+}
+
+.botão{
+    margin: 20px;
+}
+
+.formulario label{
+    padding: 10px;
+    width: 80px;
+}
+
+.botão{
+    margin: 20px;
+}
+
+body{
+    background-color:antiquewhite;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1{
+    color: white;
+}
