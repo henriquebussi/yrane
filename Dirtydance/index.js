@@ -1,3 +1,4 @@
+const api = require('./api')
 
 //chamar o express
 const express = require('express');
@@ -71,3 +72,44 @@ server.delete('/produto/:id', (req, res) => {
     produtos = newProduto;
     res.send({message: 'Sucesso!'})
 })
+
+//async - assincrona (não tem tempo exato de responder)
+
+//await - não retorna, não prossiga enquanto
+
+server.get('/pokemon/:id', async (req, res) => {
+
+    const {id} = req.params
+    try{ 
+        const {data} = await api.get(`pokemon/${id}`)
+        return res.send({name: data.name})
+    } catch (error) {
+        res.send({ erro: error.message})
+    }
+})
+
+const apikey = '212afe3babeb419b3b74c9fecdbd2c91';
+const axios = require('axios')
+
+server.get('/climatempo/:cidade', async (req, res) => {
+    const city = req.params.cidade;
+    try{
+        const response = await axios.get (`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apikey}&units=metric`)
+
+        res.send({Temperatura: response.data.main.temp})
+
+    } catch(error){
+        res.send({ erro: 'Erro ao obter dados metereológicos', error})
+    }
+})
+
+
+// server.get('/tempo/', async (req, res) => {
+//     const {id} = req.params
+//     try{
+//         const {data} = await apitempo.get(`tempo/${id}`)
+//         return res.send({name: data.name})
+//     } catch (error) {
+//         res.send({ erro: error.message})
+//     }
+// })
